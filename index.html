@@ -10,7 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <title>Harshad and Eric's Webpage</title>
-
+  <script defer src="https://use.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
 
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" charset="utf-8"></script>
@@ -69,9 +69,9 @@
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-              <a class="dropdown-item" href="#">Fixed List</a>
+              <a class="dropdown-item" href="FixedList.html">Fixed List</a>
 
-              <a class="dropdown-item" href="#">From File</a>
+              <a class="dropdown-item" href="FromFile.html">From File</a>
 
               <a class="dropdown-item" href="#">Google API</a>
 
@@ -91,11 +91,16 @@
 
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
+              <a class="dropdown-item" href="navigator.html">Navigator*</a>
+
               <a class="dropdown-item" href="window.html">Window</a>
 
-              <a class="dropdown-item" href="#">Screen</a>
+              <a class="dropdown-item" href="screen.html">Screen</a>
 
-              <a class="dropdown-item" href="#">Location</a>
+              <a class="dropdown-item" href="location.html">Location</a>
+
+              <a class="dropdown-item" href="geolocation.html">Geolocation</a>
+
 
             </div>
 
@@ -113,7 +118,11 @@
 
               <a class="dropdown-item" href="aboutHK.html">Harshad Kapoor</a>
 
-              <a class="dropdown-item" href="mailto:harshadkapoor7@hotmail.com?subject=feedback">Contact me via Email</a>
+              <a class="dropdown-item" href="mailto:harshadkapoor7@hotmail.com?subject=feedback">Contact Harshad via Email</a>
+
+              <a class="dropdown-item" href="aboutEM.html">Eric Munevar</a>
+
+              <a class="dropdown-item" href="mailto:ericmunevar@yahoo.com?subject=feedback">Contact Eric via Email</a>
 
             </div>
 
@@ -126,329 +135,21 @@
     </nav>
 
 
-
-
-
-    <section id="search-results">
-
-      <div class="form-group">
-
-        <div class="row">
-
-          <div class="col-md-4">
-
-            <input type="text" class="form-control" placeholder="Soccer" readonly>
-
-          </div>
-          <div class="col-md-4">
-
-            <button class="btn btn-primary" onclick="toggleResults()">Search</button>
-
-          </div>
-
-
-
-
-
-        </div>
-
-
-
+    <div class="row" style="margin-top:50px">
+      <div class="col-md-3">
+        <a href="FixedList.html"><i class="fas fa-list fa-3x"></i></a>
       </div>
-
-
-
-
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Soccer Scores ESPN</a>
-
-
-
-        </div>
-
-        <div class="url">
-
-          www.espn.com/scores
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Real-time Soccer Game scores on ESPN
-
-          </p>
-
-        </div>
-
+      <div class="col-md-3">
+        <a href="FromFile.html"><i class="fas fa-folder-open fa-3x"></i></a>
       </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Association football - Wikipedia</a>
-
-        </div>
-
-        <div class="url">
-
-          https://en.wikipedia.org/wiki/Association_football
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Association football, more commonly known as football or soccer, is a team sport played with a spherical ball between two teams of eleven players. It is played ...
-
-          </p>
-
-        </div>
-
+      <div class="col-md-3">
+        <a href="#"><i class="fab fa-google fa-3x"></i></a>
       </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">FIFA - Soccer News, Scores, Stats, Standings, and Rumors - CBS Sports</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.cbssports.com/soccer/
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            CBS Sports has the latest Soccer news, live scores, player stats, standings, fantasy games, and projections.
-
-          </p>
-
-        </div>
-
+      <div class="col-md-3">
+        <a href="#"><i class="fas fa-search fa-3x"></i></a>
       </div>
+    </div>
 
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">SOCCER.COM® Official Site | Largest Soccer Gear Selection</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.soccer.com/
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Footwear, Apparel, Equipment & More From Your Favorite Brands At SOCCER.COM®!
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Soccer | FOX Sports</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.foxsports.com/soccer
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Find live Soccer scores, Soccer player; team news, Soccer videos, rumors, stats, standings, team schedules; fantasy games on FOX Sports.
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Live Soccer Scores, Fixtures & Results | Goal.com</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.goal.com/en-us/live-scores
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Get the latest live soccer scores, results & fixtures from across the world, including UEFA Champions League, powered by Goal.com.
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Watch Live Soccer Games Online | Start Your 7-Day Free Trial</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.fubo.tv/lp/soccer
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Watch the Best of Live Soccer with fuboTV. Stream over 100 live channels with fuboTV. Start a 7 Day Free Trial. The Top Soccer Leagues. Never Miss A Game w/ DVR. Brands: FOX, NBC, CBS, TNT, beIN SPORTS.
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Find NYC Soccer League | Manhattan, Brooklyn, Queens | ZogSports</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.zogsports.com/nyc/sports/soccer.aspx
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            NYC soccer league with trained referees, great field locations and divisions for every skill level.
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">MLS Soccer</a>
-
-        </div>
-
-        <div class="url">
-
-          https://www.mlssoccer.com/
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Colorado RapidsFC DallasHouston DynamoLos Angeles FCLA GalaxyMinnesota United FCPortland TimbersReal Salt LakeSan Jose EarthquakesSeattle ...
-
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="result">
-
-        <div class="title">
-
-          <a href="#">Soccer - City Parks FoundationCity Parks Foundation</a>
-
-        </div>
-
-        <div class="url">
-
-          https://cityparksfoundation.org/soccer/
-
-        </div>
-
-        <div class="description">
-
-          <p>
-
-            Soccer is about teamwork, running, and agility. Our program teaches and celebrates all. Our coaches will be joined by those from the NYC Football Club to teach ...
-
-          </p>
-
-        </div>
-
-      </div>
-
-
-
-    </section>
-
-
-
-  </div>
-
-
-
-
-
-  <script type="text/javascript">
-    $(document).ready(function() {
-
-      $(".result").hide();
-
-    });
-
-
-
-    function toggleResults() {
-
-      $(".result").toggle();
-
-    }
-  </script>
 
 </body>
 

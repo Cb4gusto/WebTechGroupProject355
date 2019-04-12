@@ -1,11 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="en" dir="ltr">
+
 <head>
 
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <title>Harshad</title>
+  <title>Harshad and Eric's Webpage</title>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" charset="utf-8"></script>
 
@@ -16,41 +18,75 @@
   <link rel="stylesheet" href="styles.css">
 
 </head>
-  <body>
-    <div class="container-fluid">
 
+
+
+<body>
+
+  <div class="container-fluid">
 
     <nav class="navbar navbar-expand-lg navbar-light">
+
       <a class="navbar-brand" href="index.html">SARA(Search And Reporting Application)</a>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+
         <span class="navbar-toggler-icon"></span>
+
       </button>
 
+
+
       <div class="collapse navbar-collapse" id="navbarToggler">
+
         <ul class="navbar-nav ml-auto">
+
           <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
               Course
+
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
               <a class="dropdown-item" href="https://learn.zybooks.com/zybook/CUNYCSCI355TeitelmanSpring2019" target="_blank">ZyBook</a>
+
             </div>
+
           </li>
+
           <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
               Search
+
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
               <a class="dropdown-item" href="FixedList.html">Fixed List</a>
+
               <a class="dropdown-item" href="#">From File</a>
+
               <a class="dropdown-item" href="#">Google API</a>
+
               <a class="dropdown-item" href="#">My Search Engine</a>
+
             </div>
+
           </li>
+
           <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
               Browser
+
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <a class="dropdown-item" href="navigator.html">Navigator*</a>
@@ -65,11 +101,17 @@
 
 
             </div>
+
           </li>
+
           <li class="nav-item dropdown">
+
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
               About
+
             </a>
+
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
               <a class="dropdown-item" href="aboutHK.html">Harshad Kapoor</a>
@@ -81,33 +123,102 @@
               <a class="dropdown-item" href="mailto:ericmunevar@yahoo.com?subject=feedback">Contact Eric via Email</a>
 
             </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <h1>About Harshad</h1>
-    <p>
-      I am a student at Queens College studying Computer Science and pursuing a B.S. degree. I work as a software developer consultant part time.
-      <ul>
-        <strong>Hobbies:</strong>
-        <li>
-          Soccer
-        </li>
-        <li>
-          Coding
-        </li>
-        <li>
-          Videogames
-        </li>
-        <li>
-          Reading
-        </li>
-        <li>
-          Cooking
-        </li>
-      </ul>
 
-      </p>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </nav>
+
+
+
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-4">
+          <input type="file" name="btnBrowse" id="btnBrowse" onchange="read(this)">
         </div>
-  </body>
+
+      </div>
+    </div>
+
+
+    <section id="search-results">
+      <div class="results">
+
+      </div>
+
+    </section>
+  </div>
+
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      $(".result").hide();
+
+    });
+    const reader = new FileReader();
+var extension = "";
+function read(input) {
+  var url = input.value;
+  var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+  extension = ext;
+  if(ext !== "csv" && ext !== "json" && ext !== "xml"){
+    document.querySelector('.results').innerHTML = "<strong>Invalid file format</strong>"
+    return;
+  }else{
+    console.log(ext);
+  }
+	const csv = input.files[0]
+	reader.readAsText(csv)
+}
+
+reader.onload = function (e) {
+  if(extension === "csv"){
+  var lines = e.target.result.split('\n');
+  var result = lines.map(line => {
+    return line.split(',');
+  });
+  var finalString = "";
+  for(var i = 0; i < result.length; i++){
+    var resultrow = "<div class='result'><div class='title'><a href='" + result[i][1] + "' target='_blank'>" + result[i][0] + "</a></div><div class='url'>" + result[i][1] + "</div><div class='description'><p>" + result[i][2] + "</p></div></div>";
+    finalString += resultrow;
+  }
+	document.querySelector('.results').innerHTML = finalString;
+}else if (extension === "json"){
+  var result = JSON.parse(e.target.result);
+  var finalString = "";
+  for(var i = 0; i < result.Result.length; i++){
+    var resultrow = "<div class='result'><div class='title'><a href='" + result.Result[i].url + "' target='_blank'>" + result.Result[i].title + "</a></div><div class='url'>" + result.Result[i].url + "</div><div class='description'><p>" + result.Result[i].description + "</p></div></div>";
+    finalString += resultrow;
+  }
+  document.querySelector('.results').innerHTML = finalString;
+}
+else if (extension === "xml"){
+  parser = new DOMParser();
+    xmlDoc = parser.parseFromString(e.target.result, "text/xml");
+    var v = xmlDoc.getElementsByTagName("result");
+    var finalString = "";
+    for(var i = 0; i < v.length; i++){
+      var resultrow = "<div class='result'><div class='title'><a href='" + v[i].childNodes[3].innerHTML + "' target='_blank'>" + v[i].childNodes[1].innerHTML + "</a></div><div class='url'>" + v[i].childNodes[3].innerHTML + "</div><div class='description'><p>" + v[i].childNodes[5].innerHTML + "</p></div></div>";
+  finalString += resultrow;
+    }
+document.querySelector('.results').innerHTML = finalString;
+}
+}
+
+
+    function readUrl(file){
+      var url = file.value;
+
+
+      const csv = input.files[0]
+    	reader.readAsText(csv)
+
+    }
+  </script>
+
+</body>
 </html>
