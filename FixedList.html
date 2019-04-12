@@ -10,6 +10,13 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900|Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    #a { display: none; }
+    #btnDownload {display:none;}
+    #ddlFormat {
+      display:none;
+    }
+</style>
 </head>
 
 <body>
@@ -40,7 +47,26 @@
       <div class="row">
         <div class="col-md-4"> <input type="text" class="form-control" placeholder="Soccer" readonly> </div>
         <div class="col-md-4"> <button class="btn btn-primary" onclick="toggleResults()">Search</button> </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <select id="ddlFormat" class="form-control">
+                <option value="CSV">CSV</option>
+                <option value="JSON">JSON</option>
+                <option value="XML">XML</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" onclick="downloadResults()" id="btnDownload">Download</button>
+            </div>
+            <a href="" id="a" download>Click here to download your file</a>
+          </div>
+
+        </div>
       </div>
+      <br />
+
+
     </div>
     <section id="search-results">
       <div class="result">
@@ -49,6 +75,7 @@
         <div class="description">
           <p> Real-time Soccer Game scores on ESPN </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Association football - Wikipedia</a> </div>
@@ -56,6 +83,7 @@
         <div class="description">
           <p> Association football, more commonly known as football or soccer, is a team sport played with a spherical ball between two teams of eleven players. It is played ... </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">FIFA - Soccer News, Scores, Stats, Standings, and Rumors - CBS Sports</a> </div>
@@ -63,6 +91,7 @@
         <div class="description">
           <p> CBS Sports has the latest Soccer news, live scores, player stats, standings, fantasy games, and projections. </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">SOCCER.COM® Official Site | Largest Soccer Gear Selection</a> </div>
@@ -70,6 +99,7 @@
         <div class="description">
           <p> Footwear, Apparel, Equipment & More From Your Favorite Brands At SOCCER.COM®! </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Soccer | FOX Sports</a> </div>
@@ -77,6 +107,7 @@
         <div class="description">
           <p> Find live Soccer scores, Soccer player; team news, Soccer videos, rumors, stats, standings, team schedules; fantasy games on FOX Sports. </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Live Soccer Scores, Fixtures & Results | Goal.com</a> </div>
@@ -84,6 +115,7 @@
         <div class="description">
           <p> Get the latest live soccer scores, results & fixtures from across the world, including UEFA Champions League, powered by Goal.com. </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Watch Live Soccer Games Online | Start Your 7-Day Free Trial</a> </div>
@@ -91,6 +123,7 @@
         <div class="description">
           <p> Watch the Best of Live Soccer with fuboTV. Stream over 100 live channels with fuboTV. Start a 7 Day Free Trial. The Top Soccer Leagues. Never Miss A Game w/ DVR. Brands: FOX, NBC, CBS, TNT, beIN SPORTS. </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Find NYC Soccer League | Manhattan, Brooklyn, Queens | ZogSports</a> </div>
@@ -98,6 +131,7 @@
         <div class="description">
           <p> NYC soccer league with trained referees, great field locations and divisions for every skill level. </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">MLS Soccer</a> </div>
@@ -105,6 +139,7 @@
         <div class="description">
           <p> Colorado RapidsFC DallasHouston DynamoLos Angeles FCLA GalaxyMinnesota United FCPortland TimbersReal Salt LakeSan Jose EarthquakesSeattle ... </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
       <div class="result">
         <div class="title"> <a href="#">Soccer - City Parks FoundationCity Parks Foundation</a> </div>
@@ -112,6 +147,7 @@
         <div class="description">
           <p> Soccer is about teamwork, running, and agility. Our program teaches and celebrates all. Our coaches will be joined by those from the NYC Football Club to teach ... </p>
         </div>
+        <input type="checkbox" class="chkbox" checked>
       </div>
     </section>
   </div>
@@ -120,8 +156,64 @@
       $(".result").hide();
     });
 
+    function downloadResults() {
+      var formatToDownload = $("#ddlFormat option:selected").text();
+      var arrayOfTitles = $(".result .title a");
+      var arrayOfURLS = $(".result .url");
+      var arrayOfDescriptions = $(".result .description p");
+      var arrayOfCheckboxes = $(".result input");
+      var length = arrayOfTitles.length;
+      if (formatToDownload === "XML") {
+        var downloadDoc = "<?xml version='1.0' encoding='UTF-8'?><results>";
+        //in a loop access it by index.innerHTML
+        for (var i = 0; i < length; i++) {
+          var checked = arrayOfCheckboxes[i].checked;
+          if (checked) {
+            downloadDoc += "<result><title>"
+            var title = arrayOfTitles[i].innerHTML;
+            var url = arrayOfURLS[i].innerHTML;
+            var desc = arrayOfDescriptions[i].innerHTML;
+            downloadDoc += title + "</title><url>" + url + "</url><description>" + desc + "</description></result>";
+
+          }
+        }
+        downloadDoc += "</results>";
+        download(downloadDoc, 'downloadResults.xml', 'text/xml')
+      }
+      else if (formatToDownload === "JSON"){
+        var downloadDoc = '{"Result" : [';
+        for(var i = 0; i < length; i++){
+          var checked = arrayOfCheckboxes[i].checked;
+          if (checked) {
+            var title = arrayOfTitles[i].innerHTML;
+            var url = arrayOfURLS[i].innerHTML;
+            var desc = arrayOfDescriptions[i].innerHTML;
+            downloadDoc += '{"title":"' + title + '", "url":"' + url + '", "description":"' + desc + '"}';
+            if(i!== length-1){
+              downloadDoc+= ',';
+            }
+          }
+        }
+        downloadDoc += "]}";
+        download(downloadDoc, 'downloadResults.json', 'text/JSON')
+      }
+    }
+
+    function download(text, name, type) {
+      var a = document.getElementById("a");
+      a.style.display = "block";
+      var file = new Blob([text], {
+        type: type
+      });
+      a.href = URL.createObjectURL(file);
+      a.download = name;
+    }
+
+
     function toggleResults() {
       $(".result").toggle();
+      $("#btnDownload").toggle();
+      $("#ddlFormat").toggle();
     }
   </script>
 </body>
