@@ -20,7 +20,7 @@
 </head>
 
 <body>
-  <div class="container-fluid"> 
+  <div class="container-fluid">
     <nav class="navbar navbar-expand-lg navbar-light"> <a class="navbar-brand" href="index.html">SARA(Search And Reporting Application)</a> <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
         aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
       <div class="collapse navbar-collapse" id="navbarToggler">
@@ -59,7 +59,7 @@
             <div class="col-md-6">
               <button class="btn btn-primary" onclick="downloadResults()" id="btnDownload">Download</button>
             </div>
-            <a href="" id="a" download>Click here to download your file</a>
+            <a href="" id="a" download onclick="hideLink()">Click here to download your file</a>
           </div>
 
         </div>
@@ -155,6 +155,10 @@
     $(document).ready(function() {
       $(".result").hide();
     });
+
+    function hideLink(){
+      $("#a").hide();
+    }
 
     function downloadResults() {
       var formatToDownload = $("#ddlFormat option:selected").text();
