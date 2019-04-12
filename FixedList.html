@@ -160,7 +160,7 @@
       $("#a").hide();
     }
 
-    function downloadResults() {
+    function downloadResults()  {
       var formatToDownload = $("#ddlFormat option:selected").text();
       var arrayOfTitles = $(".result .title a");
       var arrayOfURLS = $(".result .url");
@@ -200,6 +200,9 @@
         }
         downloadDoc += "]}";
         download(downloadDoc, 'downloadResults.json', 'text/JSON')
+      }
+      else if (formatToDownload === "CSV"){
+        //ERICCCC add ur code here
       }
     }
 
