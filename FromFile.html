@@ -10,6 +10,13 @@
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900|Ubuntu" rel="stylesheet">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="styles.css">
+  <style>
+    #a { display: none; }
+    #btnDownload {display:none;}
+    #ddlFormat {
+      display:none;
+    }
+</style>
 </head>
 
 <body>
@@ -39,6 +46,22 @@
     <div class="form-group">
       <div class="row">
         <div class="col-md-4"> <input type="file" name="btnBrowse" id="btnBrowse" onchange="read(this)"> </div>
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-6">
+              <select id="ddlFormat" class="form-control">
+                <option value="CSV">CSV</option>
+                <option value="JSON">JSON</option>
+                <option value="XML">XML</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-primary" onclick="downloadResults()" id="btnDownload">Download</button>
+            </div>
+            <a href="" id="a" download onclick="hideLink()">Click here to download your file</a>
+          </div>
+
+        </div>
       </div>
     </div>
     <section id="search-results">
@@ -62,9 +85,13 @@
       } else {
         console.log(ext);
       }
-      const csv = input.files[0] reader.readAsText(csv)
+      const csv = input.files[0];
+      reader.readAsText(csv);
+
     }
     reader.onload = function(e) {
+      $("#btnDownload").show();
+      $("#ddlFormat").show();
       if (extension === "csv") {
         var lines = e.target.result.split('\n');
         var result = lines.map(line => {
@@ -73,7 +100,7 @@
         var finalString = "";
         for (var i = 0; i < result.length; i++) {
           var resultrow = "<div class='result'><div class='title'><a href='" + result[i][1] + "' target='_blank'>" + result[i][0] + "</a></div><div class='url'>" + result[i][1] + "</div><div class='description'><p>" + result[i][2] +
-            "</p></div></div>";
+            "</p></div><input type='checkbox' class='chkbox' checked></div>";
           finalString += resultrow;
         }
         document.querySelector('.results').innerHTML = finalString;
@@ -100,11 +127,12 @@
       }
     }
 
-    function readUrl(file) {
-      var url = file.value;
-      const csv = input.files[0] reader.readAsText(csv)
+    function hideLink(){
+      $("#a").hide();
     }
+
   </script>
+  <script src="index.js" charset="utf-8"></script>
 </body>
 
 </html>
